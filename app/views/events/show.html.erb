@@ -1,1 +1,42 @@
 show.html.erb
+
+<p>
+  <strong>Created By:</strong>
+  <%= @event.user %>
+</p>
+
+<p>
+  <strong>Event Name:</strong>
+  <%= @event.name %>
+</p>
+
+<p>
+  <strong>Event Description:</strong>
+  <%= @event.description %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @event.date %>
+</p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @event.location %>
+</p>
+
+<p>
+  <strong>Banner:</strong>
+  <%= @event.img %>
+</p>
+
+<p>
+  <strong>Maximum number of group:</strong>
+  <%= @event.max_group %>
+</p>
+
+<p>
+  <strong>Maximum member per group:</strong>
+  <%= @event.max_per_group %>
+</p>
+<%= link_to 'Back', root_path %>
