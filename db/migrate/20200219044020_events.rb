@@ -9,7 +9,7 @@ class Events < ActiveRecord::Migration[6.0]
       t.text :img
       t.integer :max_group
       t.integer :max_per_group
-
       t.timestamps
+    end
   end
 end
