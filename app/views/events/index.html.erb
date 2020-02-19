@@ -25,7 +25,7 @@ index.html.erb
       <td><%= event.max_per_group %></td>
       <td>
       	<% if event.users.exists? %>
-      	<h1> already there </h1>
+      	<button type="button" disabled>joined</button>
       	<% else %>
       	<%= form_with(url: "/join" , method: "post") do %>
   				 <input name="event_id" type="hidden" value= <%=event.id %>>
