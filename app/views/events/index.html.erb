@@ -17,7 +17,7 @@ index.html.erb
 
   <% @events.each do |event| %>
     <tr>
-      <td><%= event.user %></td>
+      <td><%= event.users %></td>
       <td><%= event.name %></td>
       <td><%= event.description %></td>
       <td><%= event.date %></td>
@@ -25,6 +25,14 @@ index.html.erb
       <td><%= event.img %></td>
       <td><%= event.max_group %></td>
       <td><%= event.max_per_group %></td>
+      <td>
+      	<%= form_with(url: "/join" , method: "post") do %>
+  				 <input name="event_id" type="hidden" value= <%=event.id %>>
+  				 <input name="user_id" type="hidden" value= <%=@user_id.to_i %>>
+  				 <%= submit_tag 'Join'%>
+				<% end %>
+
+      	</td>
       <td><%= link_to 'Show', event_path(event) %></td>
       <td><%= link_to 'Edit', edit_event_path(event) %></td>
     </tr>

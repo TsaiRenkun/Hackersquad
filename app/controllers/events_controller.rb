@@ -6,7 +6,7 @@ class EventsController < ApplicationController
   # GET /events.json
   def index
     @events = Event.all
-    # @profile = current_user.profile
+    @user_id = current_user.id
   end
 
   # GET /events/1
@@ -34,7 +34,7 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
 
-    @event.user = current_user
+    @event.user_id = current_user
 
     @event.save
     redirect_to @event
@@ -67,6 +67,6 @@ class EventsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def event_params
-      params.require(:event).permit(:user, :name, :description, :date, :location, :img, :max_group, :max_per_group)
+      params.require(:event).permit(:user_id, :name, :description, :date, :location, :img, :max_group, :max_per_group)
     end
 end
