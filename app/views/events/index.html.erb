@@ -4,7 +4,6 @@ index.html.erb
 
 <table>
   <tr>
-    <th>user</th>
     <th>name</th>
     <th>description</th>
     <th>date</th>
@@ -17,7 +16,6 @@ index.html.erb
 
   <% @events.each do |event| %>
     <tr>
-      <td><%= event.users %></td>
       <td><%= event.name %></td>
       <td><%= event.description %></td>
       <td><%= event.date %></td>
@@ -26,13 +24,16 @@ index.html.erb
       <td><%= event.max_group %></td>
       <td><%= event.max_per_group %></td>
       <td>
+      	<% if event.users.exists? %>
+      	<h1> already there </h1>
+      	<% else %>
       	<%= form_with(url: "/join" , method: "post") do %>
   				 <input name="event_id" type="hidden" value= <%=event.id %>>
-  				 <input name="user_id" type="hidden" value= <%=@user_id.to_i %>>
+  				 <input name="user_id" type="hidden" value= <%=@user_id.to_i%>>
   				 <%= submit_tag 'Join'%>
 				<% end %>
-
-      	</td>
+				<% end %>
+      </td>
       <td><%= link_to 'Show', event_path(event) %></td>
       <td><%= link_to 'Edit', edit_event_path(event) %></td>
     </tr>

@@ -29,6 +29,15 @@ ActiveRecord::Schema.define(version: 2020_02_19_084512) do
     t.index ["user_id"], name: "index_events_on_user_id"
   end
 
+  create_table "events_users", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "event_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["event_id"], name: "index_events_users_on_event_id"
+    t.index ["user_id"], name: "index_events_users_on_user_id"
+  end
+
   create_table "userprofiles", force: :cascade do |t|
     t.bigint "user_id"
     t.string "username"

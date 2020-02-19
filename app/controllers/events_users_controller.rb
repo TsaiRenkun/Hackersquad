@@ -4,12 +4,9 @@ class EventsUsersController < ApplicationController
   end
 
   def join
-     puts "asdadsdasdsadsasdjhlsadhskjadnaskdnksajdnasjdha"
-
     @event = Event.find(params[:event_id].to_i)
     @user = current_user
 
-    puts @user
 
     @event.users << @user
 

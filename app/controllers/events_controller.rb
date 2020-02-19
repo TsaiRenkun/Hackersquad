@@ -1,12 +1,12 @@
 class EventsController < ApplicationController
-  # before_action :authenticate_user!, :except => [ :show, :index ]
+  before_action :authenticate_user!, :except => [ :show, :index ]
   # before_action :set_event, only: [:show, :edit, :update, :destroy]
 
   # GET /events
   # GET /events.json
   def index
     @events = Event.all
-    @user_id = current_user.id
+    @user = current_user.id
   end
 
   # GET /events/1
@@ -20,7 +20,7 @@ class EventsController < ApplicationController
   # GET /events/new
   def new
     @event = Event.new
-    # @profile = current_user.profile
+    @user_id = current_user.id
   end
 
   # GET /events/1/edit
@@ -34,7 +34,7 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
 
-    @event.user_id = current_user
+    @event.user_id = current_user.id
 
     @event.save
     redirect_to @event

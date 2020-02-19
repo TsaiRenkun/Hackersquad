@@ -1,4 +1,7 @@
 <%= form_with scope: :event, url: events_path, local: true do |form| %>
+
+  <input name="user_id" type="hidden" value= <%= @user_id.to_i %>>
+
   <p>
     <%= form.label :name %><br>
     <%= form.text_field :name %>

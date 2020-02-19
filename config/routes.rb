@@ -49,12 +49,7 @@ Rails.application.routes.draw do
 
 
 
-
-
-
-
 #kun code start below
-
   post '/join' => 'events_users#join'
 
 
