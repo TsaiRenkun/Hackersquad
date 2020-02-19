@@ -30,7 +30,11 @@ Rails.application.routes.draw do
 
 
 #safs code start below
-
+  get '/userprofiles/new' => 'userprofiles#new', as: 'new_userprofile'
+  post '/userprofiles' => 'userprofiles#create'
+  get '/userprofiles/:id' => 'userprofiles#show' , as: 'userprofile'
+  get '/userprofiles/:id/edit' => 'userprofiles#edit', as: 'edit_userprofile'
+  patch '/userprofiles/:id' => 'userprofiles#update'
 
 
 

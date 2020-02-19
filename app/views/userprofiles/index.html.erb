@@ -1,0 +1,24 @@
+index.html.erb
+<%= link_to 'New userprofile', new_userprofile_path %>
+<h1>Listing User Profile</h1>
+
+<table>
+  <tr>
+    <th>user</th>
+    <th>username</th>
+    <th>description</th>
+    <th>img</th>
+    <th></th>
+  </tr>
+
+  <% @events.each do |userprofile| %>
+    <tr>
+      <td><%= userprofile.user %></td>
+      <td><%= userprofile.username %></td>
+      <td><%= userprofile.description %></td>
+      <td><%= userprofile.img %></td>
+      <td><%= link_to 'Show', userprofile_path(userprofile) %></td>
+      <td><%= link_to 'Edit', edit_userprofile_path(userprofile) %></td>
+    </tr>
+  <% end %>
+</table>
