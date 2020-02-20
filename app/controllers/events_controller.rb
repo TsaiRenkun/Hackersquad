@@ -39,6 +39,12 @@ end
     @event.user_id = current_user.id
 
     @event.save
+
+    event_params[:max_group].to_i.times do |i|
+      puts "hello yo"
+      Group.create(group_number:i+1, event_id: @event.id)
+    end
+
     redirect_to @event
   end
 
