@@ -26,12 +26,6 @@ index.html.erb
       <td>
       	<% if event.users.exists? %>
       	<button type="button" disabled>joined</button>
-      	<% else %>
-      	<%= form_with(url: "/join" , method: "post") do %>
-  				 <input name="event_id" type="hidden" value= <%=event.id %>>
-  				 <input name="user_id" type="hidden" value= <%=@user_id.to_i%>>
-  				 <%= submit_tag 'Join'%>
-				<% end %>
 				<% end %>
       </td>
       <td><%= link_to 'Show', event_path(event) %></td>
