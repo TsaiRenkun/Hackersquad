@@ -5,11 +5,13 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    puts "HELLOHELOOHELLO"
     @events = Event.all
+    if user_signed_in?
     @user = current_user.id
+    else
+    @events = Event.all
   end
-
+end
   # GET /events/1
   # GET /events/1.json
   def show
