@@ -24,7 +24,7 @@ index.html.erb
       <td><%= event.max_group %></td>
       <td><%= event.max_per_group %></td>
       <td>
-      	<% if event.users.exists? %>
+      	<% if event.attends.find_by(user: @user)%>
       	<button type="button" disabled>joined</button>
 				<% end %>
       </td>

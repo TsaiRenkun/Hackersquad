@@ -50,8 +50,8 @@ Rails.application.routes.draw do
 
 
 #kun code start below
-  post '/join' => 'events_users#join'
-  delete '/leave' => 'events_users#leave'
+  post '/join' => 'attends#join'
+  delete '/leave' => 'attends#leave'
 
 
 
