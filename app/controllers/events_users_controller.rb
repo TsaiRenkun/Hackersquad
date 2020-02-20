@@ -7,11 +7,25 @@ class EventsUsersController < ApplicationController
     @event = Event.find(params[:event_id].to_i)
     @user = current_user
 
-
     @event.users << @user
 
-    redirect_to @event
+    respond_to do |format|
+        format.js { render :js => "window.location.href = '/events/#{params[:event_id]}'" }
+    end
+
   end
+
+
+  def leave
+    @event = Event.find(params[:event_id].to_i)
+    @user = current_user
+
+    @event.users.delete(@user)
+
+    respond_to do |format|
+        format.js { render :js => "window.location.href = '/'" }
+  end
+end
 
   def destory
   end
