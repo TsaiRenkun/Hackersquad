@@ -47,6 +47,7 @@ show.html.erb
   				 <%= submit_tag 'Leave'%>
 				<% end %>
 <% elsif user_signed_in? %>
+
 	<%= form_with scope: :attend, url: join_path, local: true do |form| %>
 	  <%= hidden_field_tag(:user_id, @user) %>
 	  <%= hidden_field_tag(:event_id, @event.id) %>
