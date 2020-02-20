@@ -5,6 +5,7 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
+    puts "HELLOHELOOHELLO"
     @events = Event.all
     @user = current_user.id
   end
@@ -14,7 +15,6 @@ class EventsController < ApplicationController
   def show
     # @profile = current_user.profile
     @event = Event.find(params[:id])
-
   end
 
   # GET /events/new
