@@ -53,6 +53,8 @@ Rails.application.routes.draw do
   post '/join' => 'attends#join'
   delete '/leave' => 'attends#leave'
 
+  post '/join/group' => 'attends_groups#join'
+
 
 
 

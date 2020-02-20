@@ -6,8 +6,12 @@ before_action :authenticate_user!, :except => [ :show, :index ]
   end
 
   def show
+    if Userprofile.find_by(user_id: params[:id])
     @userprofile = Userprofile.find_by(user_id: params[:id])
+  else
+    redirect_to new_userprofile_path
   end
+end
 
   def new
       @userprofile = Userprofile.new

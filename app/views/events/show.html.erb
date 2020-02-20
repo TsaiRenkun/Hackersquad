@@ -45,9 +45,30 @@ show.html.erb
 <%= form_with(url: "/leave" , method: "delete") do %>
   				 <input name="event_id" type="hidden" value= <%=@event.id %>>
   				 <%= submit_tag 'Leave'%>
-				<% end %>
+  				 <% end %>
+					<table>
+  					<tr>
+					    <th>Group</th>
+					    <th>Join/Leave</th>
+					    <th>Pax</th>
+					    <th>Name</th>
+					  </tr>
+					  <% @group.each do |grp| %>
+					  <tr>
+      				<td><%= grp.group_number %></td>
+      				<td>
+      					<%= form_with(url: "/join/group" , method: "post") do %>
+  				 			<input name="attend_id" type="hidden" value= <%= Attend.find_by(event:@event.id, user:@user).id %>>
+  				 			<input name="group_id" type="hidden" value= <%= Group.find_by(group_number:grp.group_number, event:@event.id).id %>>
+  				 			<%= submit_tag 'join'%>
+  						</td>
+      				<td>1</td>
+      				<td></td>
+      			</tr>
+					<% end %>
+				</table>
+				<%end%>
 <% elsif user_signed_in? %>
-
 	<%= form_with scope: :attend, url: join_path, local: true do |form| %>
 	  <%= hidden_field_tag(:user_id, @user) %>
 	  <%= hidden_field_tag(:event_id, @event.id) %>

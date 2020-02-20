@@ -20,6 +20,7 @@ end
     if user_signed_in?
     @user = current_user.id
     @event = Event.find(params[:id])
+    @group = Group.where(event: params[:id])
     end
   end
 
