@@ -17,6 +17,10 @@ end
   def show
     # @profile = current_user.profile
     @event = Event.find(params[:id])
+    if user_signed_in?
+    @user = current_user.id
+    @event = Event.find(params[:id])
+    end
   end
 
   # GET /events/new
