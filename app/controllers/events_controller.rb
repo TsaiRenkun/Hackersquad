@@ -38,18 +38,20 @@ end
   # POST /events
   # POST /events.json
   def create
+    puts "testing11"
     @event = Event.new(event_params)
 
     @event.user_id = current_user.id
 
     @event.save
 
+
     event_params[:max_group].to_i.times do |i|
       puts "hello yo"
-      Group.create(group_number:i+1, event_id: @event.id)
+      Group.create(event: @event, group_number:i+1)
     end
 
-    redirect_to @event
+    # redirect_to @event
   end
 
   # PATCH/PUT /events/1
@@ -81,4 +83,8 @@ end
     def event_params
       params.require(:event).permit(:user_id, :name, :description, :date, :location, :img, :max_group, :max_per_group)
     end
+
+    def group_params
+       params.require(:group).permit(:event_id, :group_number)
+     end
 end
