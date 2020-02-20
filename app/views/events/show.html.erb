@@ -40,33 +40,18 @@ show.html.erb
   <%= @event.max_per_group %>
 </p>
 
-<% if @event.users.exists? && user_signed_in? %>
+<% if @event.attends.find_by(user: @user) %>
 <%= link_to 'Back', root_path %>
 <%= form_with(url: "/leave" , method: "delete") do %>
   				 <input name="event_id" type="hidden" value= <%=@event.id %>>
   				 <%= submit_tag 'Leave'%>
 				<% end %>
-
 <% elsif user_signed_in? %>
-<%= form_with(url: "/join" , method: "post") do |form|%>
-  				 <input name="event_id" type="hidden" value= <%= @event.id %>>
-  				 <input name="user_id" type="hidden" value= <%=@user_id.to_i%>>
-  				 	<%= form.collection_select(:role_id, Role.all, :id, :name) %>
-  				 <%= submit_tag 'Join'%>
-				<% end %>
+
+	<%= form_with scope: :attend, url: join_path, local: true do |form| %>
+	  <%= hidden_field_tag(:user_id, @user) %>
+	  <%= hidden_field_tag(:event_id, @event.id) %>
+	  <%= form.collection_select(:role_id, Role.all, :id, :name) %>
+	    <%= form.submit 'Join'%>
+	<% end %>
 <% end %>
-
-
-
-<!-- <table>
-	<tr>
-		<th>Groups</th>
-		<th>Join/Leave</th>
-	</tr>
-
-	<#% .each do |event| %>
-		<tr>
-			<td></td>
-			<td></td>
-		</tr>
-	<#% end %> -->

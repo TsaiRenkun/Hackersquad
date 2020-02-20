@@ -1,3 +1,3 @@
 class Role < ApplicationRecord
-  belongs_to :event
+  has_many :attend
 end
