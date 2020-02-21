@@ -21,12 +21,15 @@ class AttendsGroupsController < ApplicationController
     @attendee.groups.delete(@group)
 
     respond_to do |format|
-        format.js { render :js => "window.location.href = '/'" }
+        format.js { render :js => "window.location.href = '/events/#{@group.event_id}'" }
+        # format.js { render :js => "window.location.href = '/'" }
   end
 end
 
   def destory
   end
+
+
 
   private
 
