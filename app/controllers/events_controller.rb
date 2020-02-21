@@ -14,7 +14,10 @@ end
   def show
     @event = Event.find(params[:id])
     if user_signed_in?
-    @user = current_user.id
+      @user = current_user.id
+      if Userprofile.find(@user) == nil
+        redirect_to userprofiles_path
+      end
     @event = Event.find(params[:id])
     @group = Group.where(event: params[:id])
     end
