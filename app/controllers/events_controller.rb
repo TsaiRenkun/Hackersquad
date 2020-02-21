@@ -4,7 +4,10 @@ class EventsController < ApplicationController
   def index
     @events = Event.all
     if user_signed_in?
-    @user = current_user.id
+      @user = current_user.id
+      if Userprofile.find_by(user:current_user.id).nil?
+        redirect_to new_userprofile_path
+      end
     else
     @events = Event.all
   end
@@ -14,10 +17,7 @@ end
   def show
     @event = Event.find(params[:id])
     if user_signed_in?
-      @user = current_user.id
-      if Userprofile.find(@user) == nil
-        redirect_to userprofiles_path
-      end
+    @user = current_user.id
     @event = Event.find(params[:id])
     @group = Group.where(event: params[:id])
     end
