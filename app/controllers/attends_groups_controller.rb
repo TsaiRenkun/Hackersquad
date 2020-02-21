@@ -4,7 +4,6 @@ class AttendsGroupsController < ApplicationController
   end
 
   def join
-    puts "FUCK YOU YOU CCCBNBBB"
     @attendee = Attend.find(params[:attend_id])
     @group = Group.find(params[:group_id])
 
@@ -14,7 +13,6 @@ class AttendsGroupsController < ApplicationController
         format.js { render :js => "window.location.href = '/events/#{@group.event_id}'" }
     end
   end
-
 
   def leave
     @attendee = Attend.find(params[:attend_id])

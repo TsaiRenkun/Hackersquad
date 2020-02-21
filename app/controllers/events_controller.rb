@@ -1,7 +1,6 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!, :except => [ :show, :index ]
 
-
   def index
     @events = Event.all
     if user_signed_in?
@@ -25,6 +24,7 @@ end
   def new
     @event = Event.new
     @user_id = current_user.id
+    @role = Role.all
   end
 
 
@@ -69,7 +69,7 @@ end
 
     # Only allow a list of trusted parameters through.
     def event_params
-      params.require(:event).permit(:user_id, :name, :description, :date, :location, :img, :max_group, :max_per_group)
+      params.require(:event).permit(:user_id, :name, :description, :date, :location, :img, :max_group, :max_per_group, :developer, :ux)
     end
 
     def group_params

@@ -30,6 +30,8 @@ index.html.erb
       </td>
       <td><%= link_to 'Show', event_path(event) %></td>
       <td><%= link_to 'Edit', edit_event_path(event) %></td>
+      <td><%= Attend.where(event:event.id).length %></td>
+      <td><%= event.developer.to_i + event.ux.to_i %>
     </tr>
   <% end %>
 </table>
