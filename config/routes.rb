@@ -54,6 +54,7 @@ Rails.application.routes.draw do
   delete '/leave' => 'attends#leave'
 
   post '/join/group' => 'attends_groups#join'
+  delete '/leave/group' => 'attends_groups#leave'
 
 
 

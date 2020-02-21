@@ -7,6 +7,7 @@ class AttendsGroupsController < ApplicationController
     puts "FUCK YOU YOU CCCBNBBB"
     @attendee = Attend.find(params[:attend_id])
     @group = Group.find(params[:group_id])
+
     @group.attends << @attendee
 
     respond_to do |format|
@@ -16,15 +17,15 @@ class AttendsGroupsController < ApplicationController
 
 
   def leave
-    @event = Event.find(params[:event_id].to_i)
-    @user = current_user
+    @attendee = Attend.find(params[:attend_id])
+    @group = Group.find(params[:group_id])
 
-    @event.attends.find_by(user: @user).delete
+    @attendee.groups.delete(@group)
 
     respond_to do |format|
         format.js { render :js => "window.location.href = '/'" }
-# somegroup.attends.delete(Attend.find_by(user_id:user5))
   end
+end
 
   def destory
   end

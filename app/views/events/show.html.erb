@@ -56,7 +56,14 @@ show.html.erb
 					  <% @group.each do |grp| %>
 					  <tr>
       				<td><%= grp.group_number %></td>
-      				<td>
+      				<% if Group.find_by(event:@event.id, group_number:grp.group_number).attends.exists? %>
+      					<%= form_with(url: "/leave/group" , method: "delete") do %>
+  				 				<input name="attend_id" type="hidden" value= <%= Attend.find_by(event:@event.id, user:@user).id %>>
+  				 				<input name="group_id" type="hidden" value= <%= Group.find_by(group_number:grp.group_number, event:@event.id).id %>>
+  				 				<%= submit_tag 'Leave'%>
+      							<td>
+      						<% end %>
+      					<% end %>
       					<%= form_with(url: "/join/group" , method: "post") do %>
   				 			<input name="attend_id" type="hidden" value= <%= Attend.find_by(event:@event.id, user:@user).id %>>
   				 			<input name="group_id" type="hidden" value= <%= Group.find_by(group_number:grp.group_number, event:@event.id).id %>>
@@ -66,8 +73,8 @@ show.html.erb
       				<td></td>
       			</tr>
 					<% end %>
+				<% end %>
 				</table>
-				<%end%>
 <% elsif user_signed_in? %>
 	<%= form_with scope: :attend, url: join_path, local: true do |form| %>
 	  <%= hidden_field_tag(:user_id, @user) %>
