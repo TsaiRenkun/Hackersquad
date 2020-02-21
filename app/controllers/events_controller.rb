@@ -4,7 +4,10 @@ class EventsController < ApplicationController
   def index
     @events = Event.all
     if user_signed_in?
-    @user = current_user.id
+      @user = current_user.id
+      if Userprofile.find_by(user:current_user.id).nil?
+        redirect_to new_userprofile_path
+      end
     else
     @events = Event.all
   end
