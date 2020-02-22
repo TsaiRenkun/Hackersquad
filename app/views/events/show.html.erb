@@ -63,13 +63,12 @@ show.html.erb
 	      				<td><%= grp.developer %></td>
 	      				<td><%= grp.ux %></td>
 	      				<td>
-		      				<% if Attend.find_by(user:@user.id, event:@event.id, group:grp.id) && Attend.find_by(group:grp.id).exists? %>
+		      				<% if Attend.find_by(user:@user.id, event:@event.id, group:grp.id) %>
 		      					<%= form_with(url: "/leave/group" , method: "delete") do %>
-			  				 			<input name="attend_id" type="hidden" value= <%= Attend.find_by(user:@user.id, event:@event.id).id %>>
-			  				 			<input name="group_id" type="hidden" value= <%= grp.id %>>
+			  				 			<input name="attend_id" type="hidden" value= <%= Attend.find_by(user:@user.id, event:@event.id, group:grp.id).id %>>
 			  				 			<%= submit_tag 'Leave'%>
 		      					<% end %>
-		      				<% elsif Attend.find_by(user:@user.id, event:@event.id) %>
+		      				<% elsif Attend.find_by(user:@user.id, event:@event.id) && Attend.exists?(user:1, event:1, group:nil) %>
 		      					<%= form_with(url: "/join/group" , method: "post") do %>
 			  				 			<input name="attend_id" type="hidden" value= <%= Attend.find_by(user:@user.id, event:@event.id).id %>>
 			  				 			<input name="group_id" type="hidden" value= <%= grp.id %>>
