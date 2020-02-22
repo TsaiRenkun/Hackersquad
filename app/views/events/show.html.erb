@@ -67,16 +67,23 @@ show.html.erb
 		      					<%= form_with(url: "/leave/group" , method: "delete") do %>
 			  				 			<input name="attend_id" type="hidden" value= <%= Attend.find_by(user:@user.id, event:@event.id, group:grp.id).id %>>
 			  				 			<%= submit_tag 'Leave'%>
-		      					<% end %>
-		      				<% elsif Attend.find_by(user:@user.id, event:@event.id) && Attend.exists?(user:1, event:1, group:nil) %>
-		      					<%= form_with(url: "/join/group" , method: "post") do %>
-			  				 			<input name="attend_id" type="hidden" value= <%= Attend.find_by(user:@user.id, event:@event.id).id %>>
-			  				 			<input name="group_id" type="hidden" value= <%= grp.id %>>
-			  				 			<%= submit_tag 'join' %>
-		      					<% end %>
+		      						<% end %>
+		      					<% elsif Attend.find_by(user:@user.id, event:@event.id) && Attend.exists?(user:@user.id, event:@event.id, group:nil) && Attend.where(event:@event.id, group:grp.id).length << @event.developer.to_i + @event.ux.to_i %>
+		      							<%= form_with(url: "/join/group" , method: "post") do %>
+		      								<% if Attend.where(event: @event.id , group:grp.id, role: 1).length == @event.developer.to_i && Attend.find_by(event: @event.id, user:@user.id).role.id.to_i == 1%>
+			  				 					<p> The role you are applying for in this team is full </p>
+			  				 				<% elsif Attend.where(event: @event.id , group:grp.id, role: 2).length == @event.ux.to_i && Attend.find_by(event: @event.id, user:@user.id).role.id.to_i == 2 %>
+			  				 					<p> The role you are applying for in this team is full </p>
+			  				 				<% else %>
+			  				 					<input name="attend_id" type="hidden" value= <%= Attend.find_by(user:@user.id, event:@event.id).id %>>
+			  				 					<input name="group_id" type="hidden" value= <%= grp.id %>>
+			  				 					<%= submit_tag 'join' %>
+
+			  				 				<% end %>
+			  				 		<% end %>
+		      				<% end %>
 	  						</td>
 	      			</tr>
-						<% end %>
 						<% end %>
 					</table>
 
@@ -84,7 +91,13 @@ show.html.erb
 	<%= form_with scope: :attend, url: join_path, local: true do |form| %>
 	  <%= hidden_field_tag(:user_id, @user.id) %>
 	  <%= hidden_field_tag(:event_id, @event.id) %>
-	     <%= form.collection_select(:role_id, @role, :id, :name) %>
+	  <% if Attend.where(event: @event.id, role: 1).length == @event.developer.to_i * @event.max_group.to_i %>
+	  		<%= form.collection_select(:role_id, @role.where(id:1), :id, :name) %>
+	  <% elsif Attend.where(event: @event.id, role: 2).length == @event.ux.to_i * @event.max_group.to_i %>
+	  		<%= form.collection_select(:role_id, @role.where(id:2), :id, :name) %>
+	  <% else %>
+	    	<%= form.collection_select(:role_id, @role, :id, :name) %>
+	    <% end %>
 	<%= form.submit 'Join'%>
 	<% end %>
 <% elsif user_signed_in? && Attend.where(event:@event.id).length == (@event.developer.to_i * @event.max_group.to_i + @event.ux.to_i * @event.max_group.to_i) %>
