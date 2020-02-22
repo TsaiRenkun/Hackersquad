@@ -1,3 +1,3 @@
 class Role < ApplicationRecord
-  has_many :attend
+  has_many :attends
 end

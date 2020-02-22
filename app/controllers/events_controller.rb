@@ -17,9 +17,10 @@ end
   def show
     @event = Event.find(params[:id])
     if user_signed_in?
-    @user = current_user.id
+    @user = current_user
     @event = Event.find(params[:id])
     @group = Group.where(event: params[:id])
+    @role = Role.all
     end
   end
 
@@ -45,7 +46,7 @@ end
 
     event_params[:max_group].to_i.times do |i|
       puts "hello yo"
-      Group.create(event: @event, group_number:i+1)
+      Group.create(event: @event, group_number:i+1, developer: @event.developer, ux: @event.ux)
     end
 
     redirect_to @event
@@ -76,7 +77,7 @@ end
     end
 
     def group_params
-       params.require(:group).permit(:event_id, :group_number)
+       params.require(:group).permit(:event_id, :group_number, :developer, :ux)
     end
 
 end

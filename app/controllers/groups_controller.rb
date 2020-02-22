@@ -1,13 +1,12 @@
-class AttendsGroupsController < ApplicationController
+class GroupsController < ApplicationController
 
   def new
   end
 
   def join
-    @attendee = Attend.find(params[:attend_id])
-    @group = Group.find(params[:group_id])
+    @attend = Attend.find(params[:attend_id])
 
-    @group.attends << @attendee
+    @attend.update(group_params)
 
     respond_to do |format|
         format.js { render :js => "window.location.href = '/events/#{@group.event_id}'" }
@@ -32,9 +31,8 @@ end
 
 
   private
+    def group_params
+      params.require(:attend).permit(:group_id)
+    end
 
-      # Only allow a list of trusted parameters through.
-      # def event_params
-      #   params.require(:event).permit(:user_id, :event_id, :role_id)
-      # end
   end
