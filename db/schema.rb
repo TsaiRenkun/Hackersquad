@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_21_034451) do
+ActiveRecord::Schema.define(version: 2020_02_21_094133) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,7 +21,9 @@ ActiveRecord::Schema.define(version: 2020_02_21_034451) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "role_id"
+    t.bigint "group_id"
     t.index ["event_id"], name: "index_attends_on_event_id"
+    t.index ["group_id"], name: "index_attends_on_group_id"
     t.index ["role_id"], name: "index_attends_on_role_id"
     t.index ["user_id"], name: "index_attends_on_user_id"
   end
@@ -54,10 +56,16 @@ ActiveRecord::Schema.define(version: 2020_02_21_034451) do
     t.text "group_number"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "developer"
+    t.integer "ux"
     t.index ["event_id"], name: "index_groups_on_event_id"
   end
 
   create_table "roles", force: :cascade do |t|
+    t.text "name"
+  end
+
+  create_table "skill", force: :cascade do |t|
     t.text "name"
   end
 
