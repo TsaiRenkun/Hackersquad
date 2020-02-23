@@ -44,11 +44,13 @@ end
 
     @event.save
 
+    uploaded_file = params[ :event ][:img].path
+    cloudnary_file = Cloudinary::Uploader.upload(uploaded_file)
+
     event_params[:max_group].to_i.times do |i|
       puts "hello yo"
       Group.create(event: @event, group_number:i+1, developer: @event.developer, ux: @event.ux)
     end
-
     redirect_to @event
   end
 
@@ -70,8 +72,12 @@ end
   end
 
   private
-
     # Only allow a list of trusted parameters through.
+
+    def uploaded_file
+      params.re
+    end
+
     def event_params
       params.require(:event).permit(:user_id, :name, :description, :date, :location, :img, :max_group, :max_per_group, :developer, :ux)
     end
