@@ -1,10 +1,9 @@
-groups show.html.erb
 <h1>Members</h1>
 <table>
 	<tr>
 		<th>Name</th>
 	</tr>
-	<% @attend.pluck(:user_id).user.each do |attend| %>
+	<% @userprofile.each do |attend| %>
 		<tr>
 			<td><%= attend%></td>
 		</tr>
