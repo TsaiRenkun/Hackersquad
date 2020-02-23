@@ -2,9 +2,9 @@ class AttendsController < ApplicationController
 
   def new
   end
-
+  
   def join
-
+    
     @attend = Attend.new(attend_params)
     @attend.user = User.find(params[:user_id])
     @attend.event = Event.find(params[:event_id])
@@ -12,7 +12,7 @@ class AttendsController < ApplicationController
     puts "AJDSHJKSADHSAJKDHSAJKDSHADJKSAHDSAKJDHSJAKDKSAHDKJSAHDJKAHDKSAJDKHS"
     @attend.save
 
-    redirect_to root_path
+    redirect_back(fallback_location: root_path)
 
   end
 

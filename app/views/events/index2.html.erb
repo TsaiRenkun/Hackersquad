@@ -1,32 +1,7 @@
-<div class="logobox">
-  <%= image_tag("logo2.png", :class => "logo") %>
-  <%= image_tag("title.png", :class => "logo") %>
-</div>
-
-<div class = "mainblockcontainer">
-  <div class = "mainblock">
-
-    <% if user_signed_in? %> 
-
-      <% if  Event.exists?(:user_id => @user) %> 
-        <div class="header"><h1>Events you are Hosting</h1></div>
-          <div class="container-for-cards">
-            <%= render 'hostingcards' %>
-          </div>
-      <% end %>
-
-      <% if  Attend.exists?(:user_id => @user) %> 
-        <div class="header"><h1>Events you are Attending</h1></div>
-              <div class="container-for-cards">
-            <%= render 'attendingcards' %>
-          </div>
-      <% end %>
-    <% end %>
-
-    <div class="header"><h1>Upcoming Events</h1></div>
-
+    <div class="header"><h1>All Events</h1></div>
+    <h2 style = "color: red">Comment from Safraz: For some strange reason, only the first one is showing up. To fix!</h2>
     <div class="container-for-cards">
-      <% @events.each do |event| %>
+      <% Event.find(:all) do |event| %>
         <div class="card">
           <div class="imagecard" style="background-image:url(<%= event.img %>); background-size:cover;"> 
             <% if event.user_id == @user %>
@@ -49,6 +24,3 @@
         </div>
       <% end %>
     </div>
-
-  </div>
-</div>

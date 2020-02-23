@@ -1,51 +1,42 @@
-show.html.erb
+<h1 class = "header"><%= @event.name %></h1>
 
-<p>
-  <strong>Created By:</strong>
-  <%= @event.users %>
-</p>
-
-<p>
-  <strong>Event Name:</strong>
-  <%= @event.name %>
-</p>
-
-<p>
-  <strong>Event Description:</strong>
-  <%= @event.description %>
-</p>
-
-<p>
-  <strong>Date:</strong>
-  <%= @event.date %>
-</p>
-
-<p>
-  <strong>Location:</strong>
-  <%= @event.location %>
-</p>
-
-<p>
-  <strong>Banner:</strong>
-  <%= @event.img %>
-</p>
-
-<p>
-  <strong>Maximum number of group:</strong>
-  <%= @event.max_group %>
-</p>
-
-<p>
-  <strong>Maximum member per group:</strong>
-  <%= @event.max_per_group %>
-</p>
+<div class = "userinfocontainer">
+	<div class = "userimg">
+		<%= image_tag(@event.img, :class => "userimg") %>
+	</div>
+	<div class = "userdescription">
+	  <h1>Description: <strong><%= @event.description %></strong></h1>
+	  <h1>Date: <strong><%= @event.date.to_formatted_s(:long) %></strong></h1>
+	  <h1>Location: <strong><%= @event.location %></strong></h1>
+	  <h1>Maximum number of group: <strong><%= @event.max_group %></strong></h1>
+	  <h1>Maximum member per group: <strong><%= @event.max_per_group %></strong></h1>
+	  <% if @event.attends.find_by(user: @user) %>
+		<%= form_with(url: "/leave" , method: "delete") do %>
+  			<input name="event_id" type="hidden" value= <%=@event.id %>>
+  			<%= submit_tag 'Leave'%>
+  		<% end %>
+	  <% elsif user_signed_in? && Attend.where(event:@event.id).length < (@event.developer.to_i * @event.max_group.to_i + @event.ux.to_i * @event.max_group.to_i )%>
+			<h1>Join as: </h1>
+			<%= form_with scope: :attend, url: join_path, local: true do |form| %>
+			  <%= hidden_field_tag(:user_id, @user.id) %>
+			  <%= hidden_field_tag(:event_id, @event.id) %>
+			  <% if Attend.where(event: @event.id, role: 1).length == @event.developer.to_i * @event.max_group.to_i %>
+			  		<%= form.collection_select(:role_id, @role.where(id:1), :id, :name) %>
+			  <% elsif Attend.where(event: @event.id, role: 2).length == @event.ux.to_i * @event.max_group.to_i %>
+			  		<%= form.collection_select(:role_id, @role.where(id:2), :id, :name) %>
+			  <% else %>
+			    	<%= form.collection_select(:role_id, @role, :id, :name) %>
+			    <% end %>
+			<%= form.submit 'Join'%>
+			<% end %>
+		<% elsif user_signed_in? && Attend.where(event:@event.id).length == (@event.developer.to_i * @event.max_group.to_i + @event.ux.to_i * @event.max_group.to_i) %>
+		<h1> event is full </h1>
+		<% end %>
+	</div>
+</div>
 
 <% if @event.attends.find_by(user: @user) %>
-<%= link_to 'Back', root_path %>
-<%= form_with(url: "/leave" , method: "delete") do %>
-  				 <input name="event_id" type="hidden" value= <%=@event.id %>>
-  				 <%= submit_tag 'Leave'%>
-  				 <% end %>
+
 
 
 					<table class="table">
@@ -91,20 +82,6 @@ show.html.erb
 	      			</tr>
 						<% end %>
 					</table>
-
-<% elsif user_signed_in? && Attend.where(event:@event.id).length < (@event.developer.to_i * @event.max_group.to_i + @event.ux.to_i * @event.max_group.to_i )%>
-	<%= form_with scope: :attend, url: join_path, local: true do |form| %>
-	  <%= hidden_field_tag(:user_id, @user.id) %>
-	  <%= hidden_field_tag(:event_id, @event.id) %>
-	  <% if Attend.where(event: @event.id, role: 1).length == @event.developer.to_i * @event.max_group.to_i %>
-	  		<%= form.collection_select(:role_id, @role.where(id:1), :id, :name) %>
-	  <% elsif Attend.where(event: @event.id, role: 2).length == @event.ux.to_i * @event.max_group.to_i %>
-	  		<%= form.collection_select(:role_id, @role.where(id:2), :id, :name) %>
-	  <% else %>
-	    	<%= form.collection_select(:role_id, @role, :id, :name) %>
-	    <% end %>
-	<%= form.submit 'Join'%>
-	<% end %>
-<% elsif user_signed_in? && Attend.where(event:@event.id).length == (@event.developer.to_i * @event.max_group.to_i + @event.ux.to_i * @event.max_group.to_i) %>
- <h2> event is full </h2>
 <% end %>
+
+<%= link_to 'Back', root_path %>

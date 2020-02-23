@@ -1,23 +1,37 @@
-<h1>Edit Profile</h1>
+<div class="parentcontainer">
+<div class="centerblock">
+
+<div class="header"><h1>Edit your Profile!</h1></div>
 
 <%= form_with scope: :userprofile, model: @userprofile, local: true do |form| %>
-  <p>
+  
+  <div class="field">
     <%= form.label :username %><br>
     <%= form.text_field :username %>
-  </p>
+  </div>
 
-  <p>
+  <div class="field">
     <%= form.label :description %><br>
     <%= form.text_field :description %>
-  </p>
+  </div>
 
-    <p>
+    <div class="field">
     <%= form.label :img %><br>
     <%= form.text_field :img %>
-  </p>
+  </div>
 
-  <p>
+<div class="center">
+  <div class="btn edit">
     <%= form.submit %>
-  </p>
+  </div>
+</div>
+
+<div class="center">
+  <div class="btn edit">
+      <%= link_to 'Back', root_path %>
+    </div>
+  </div>
+
 <% end %>
-<%= link_to 'Back', root_path %>
+</div>
+</div>
