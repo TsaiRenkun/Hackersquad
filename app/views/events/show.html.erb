@@ -52,7 +52,7 @@ show.html.erb
   					<tr>
 					    <th>Group</th>
 					    <th>Join/Leave</th>
-
+					    <th>group page</th>
 					  </tr>
 					  <% @group.each do |grp| %>
 						  <tr>
@@ -73,14 +73,15 @@ show.html.erb
 			  				 			<%# puts @attend %>
 			  				 			<%= submit_tag 'join' %>
 		      					<% end %>
-
-
 	  						</td>
-
+	  						<td><%= link_to 'Group', group_path(grp.id) %></td>
 	      			</tr>
 						<% end %>
 						<% end %>
 					</table>
+					<%# @group.where(event: params[:id]).ids.each do |grp| %>
+						<%#= link_to 'Group', group_path(grp) %>
+					<%# end %>
 <% elsif user_signed_in? && Attend.where(event:@event.id).length <(@event.developer.to_i + @event.ux.to_i)%>
 	<%= form_with scope: :attend, url: join_path, local: true do |form| %>
 	  <%= hidden_field_tag(:user_id, @user) %>
