@@ -1,54 +1,70 @@
+<div class="parentcontainer">
+<div class="centerblock">
+
+<div class="header"><h1>Create your Event!</h1></div>
+
 <%= form_with scope: :event, url: events_path, local: true do |form| %>
 
   <input name="user_id" type="hidden" value= <%= @user_id.to_i %>>
 
-  <p>
+  <div class="field">
     <%= form.label :name %><br>
     <%= form.text_field :name %>
-  </p>
+  </div>
 
-  <p>
+  <div class="field">
     <%= form.label :description %><br>
     <%= form.text_area :description %>
-  </p>
+  </div>
 
-  <p>
+  <div class="field">
     <%= form.label :date %><br>
     <%= form.date_select :date %>
-  </p>
+  </div>
 
-    <p>
+    <div class="field">
     <%= form.label :location %><br>
     <%= form.text_area :location %>
-  </p>
+  </div>
 
-  <p>
+  <div class="field">
+    <strong>Upload Image</strong>
   <%= form.file_field :img %>
-	</p>
+	</div>
 
 
-      <p>
+      <div class="field">
     <%= form.label :max_group %><br>
     <%= form.number_field :max_group %>
-  </p>
+  </div>
 
-   <p>
+   <div class="field">
     <%= form.label :max_per_group %><br>
     <%= form.number_field :max_per_group %>
-  </p>
+  </div>
 
-   <p>
+   <div class="field">
     <%= form.label :developer %><br>
     <%= form.number_field :developer %>
-  </p>
+  </div>
 
-  <p>
+  <div class="field">
     <%= form.label :UX %><br>
     <%= form.number_field :ux %>
-  </p>
+  </div>
 
-  <p>
+<div class="center">
+  <div class="btn edit">
     <%= form.submit %>
-  </p>
+  </div>
+</div>
+
+<div class="center">
+  <div class="btn edit">
+      <%= link_to 'Back', root_path %>
+    </div>
+  </div>
+
 <% end %>
-<%= link_to 'Back', root_path %>
+</div>
+</div>

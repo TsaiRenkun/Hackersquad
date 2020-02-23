@@ -1,7 +1,7 @@
 <% Attend.where(user_id:@user).each do |attend| %>
 	<div class="card">
 		<div class="imagecard" style="background-image:url(<%= Event.find_by(id:attend.event_id).img %>); background-size:cover;"> 
-		  <% if attend.user_id == @user %>
+		  <% if Event.find(attend.event_id).user_id == @user %>
 		    <div class="buttonspace"><a href= <%= edit_event_path(attend) %> class="btn btn-primary edit">Edit your event</a></div>
 		  <% end %>
 		  <% if Attend.find_by(user: @user)%>
@@ -9,12 +9,12 @@
 		  <% end %>
 		</div>
 		<div class="card-body">
-		  <h2 class="card-title"><%= Event.find_by(id:attend.event_id).name %></h2>
-		  <h3><%= Event.find_by(id:attend.event_id).date.to_formatted_s(:long) %></h3>
-		  <h3><%= Event.find_by(id:attend.event_id).location %></h3>
-		  <a href= <%= event_path(attend) %> class="btn btn-primary more">Find out more</a>
+		  <h2 class="card-title"><%= Event.find(attend.event_id).name %></h2>
+		  <h3><%= Event.find(attend.event_id).date.to_formatted_s(:long) %></h3>
+		  <h3><%= Event.find(attend.event_id).location %></h3>
+		  <a href= <%= event_path(attend.event_id) %> class="btn btn-primary more">Find out more</a>
 		  <div class="bottombox">
-		    <div>Organisor: <%= Userprofile.find_by(user_id: attend.user_id).username %></div>
+		    <div>Organisor: <%= Userprofile.find_by(user_id: (Event.find(attend.event_id).user_id)).username %></div>
 		    <div>Participants: <%= Attend.where(event:attend.event_id).length %></div>
 		  </div>          
 		</div>

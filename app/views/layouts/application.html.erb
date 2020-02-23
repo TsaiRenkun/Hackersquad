@@ -13,29 +13,24 @@
   <body>
 				<div>
             <nav class="navbar navbar-expand-lg navbar-light">
-                    <%= image_tag("logo3.png", :class => "headerlogo") %>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                  </button>
+                    <%= link_to root_path do %>
+                      <%= image_tag("logo3.png", :class => "headerlogo") %>
+                    <% end %>
                  <% if user_signed_in? %>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav mr-auto">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="/">Overview <span class="sr-only">(current)</span></a>
-                            </li>
-                            <li class="nav-item active">
-                                <a class="nav-link" href= "/userprofiles/<%=current_user.id%>" >Profile <span class="sr-only">(current)</span></a>
-                            </li>
-                        </ul>
+                                <a class="nav-link" href= "/userprofiles/<%=current_user.id%>" >  Profile  <span class="sr-only">(current)</span></a>
+                                <a class="nav-link" href= "/events/new" >  Create New Event  <span class="sr-only">(current)</span></a>
+                                 <a class="nav-link" href= "/all" >  See All Events  <span class="sr-only">(current)</span></a>
+                    </div>
                   <% end %>
                         <span class="nav-item">
                         	<% if !user_signed_in? %>
-                            <a class="nav-link" href="/users/sign_in">Login</a>
+                            <a class="nav-link" href="/users/sign_in">  Log In  </a>
                           <% end %>
                         </span>
                         <span class="nav-item">
                         	<% if !user_signed_in? %>
-                            <a class="nav-link" href="/users/sign_up">Register</a>
+                            <a class="nav-link" href="/users/sign_up">  Register  </a>
                           <% end %>
                         </span>
                         <span class="nav-item">
@@ -43,7 +38,6 @@
                             <%= link_to 'Log out', destroy_user_session_url, method: :delete %>
                           <% end %>
                         </span>
-                    </div>
                 </nav>
             </div>
             
