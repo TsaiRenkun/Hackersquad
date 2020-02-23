@@ -56,6 +56,7 @@ show.html.erb
 					    <th>Join dev</th>
 					    <th>Join ux</th>
 					    <th>Join/Leave</th>
+					    <th>group page</th>
 					  </tr>
 					  <% @group.each do |grp| %>
 						  <tr>
@@ -67,6 +68,7 @@ show.html.erb
 		      					<%= form_with(url: "/leave/group" , method: "delete") do %>
 			  				 			<input name="attend_id" type="hidden" value= <%= Attend.find_by(user:@user.id, event:@event.id, group:grp.id).id %>>
 			  				 			<%= submit_tag 'Leave'%>
+
 		      						<% end %>
 		      					<% elsif Attend.find_by(user:@user.id, event:@event.id) && Attend.exists?(user:@user.id, event:@event.id, group:nil) && Attend.where(event:@event.id, group:grp.id).length << @event.developer.to_i + @event.ux.to_i %>
 		      							<%= form_with(url: "/join/group" , method: "post") do %>
@@ -83,6 +85,7 @@ show.html.erb
 			  				 		<% end %>
 		      				<% end %>
 	  						</td>
+                <td><%= link_to 'Group', group_path(grp.id) %></td>
 	      			</tr>
 						<% end %>
 					</table>
