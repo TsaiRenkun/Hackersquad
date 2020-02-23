@@ -33,7 +33,13 @@
 		<h1> event is full </h1>
 		<% end %>
 	</div>
+	<div class="map">
+		<iframe width="600" height="450" frameborder="0" style="border:0"
+src="https://www.google.com/maps/embed/v1/search?q=<%= @event.location %>&key=AIzaSyDu1z_Aw3HJANizGUxSQJsqavEI_LbuDNk" allowfullscreen></iframe>
+	</div>
 </div>
+
+
 
 <% if @event.attends.find_by(user: @user) %>
 
