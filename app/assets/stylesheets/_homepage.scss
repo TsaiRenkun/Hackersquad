@@ -1,9 +1,16 @@
-
+.header {
+	text-align: center;
+	font-family: orator-std, monospace;
+	font-style: normal;
+	font-weight: 200;
+	text-transform: uppercase;
+}
 
 .card {
 	margin:10px;
 	text-align: center;
 	text-overflow: ellipsis;
+	width:300px;
 }
 
 .container-for-cards {
@@ -12,18 +19,20 @@
 }
 
 .imagecard {
-	height: 300px;
 	width: 300px;
+	height: 300px;
 	display: flex;
 	flex-wrap: wrap;
 	flex-direction: row;
 	text-align: center;
+	object-fit: contain !important;
 }
+
 
 
 .more {
 	margin: 10px;
-	width: 250px;
+	width: 200px;
 	font-size: 20px !important;
 }
 
@@ -39,6 +48,9 @@
 .edit {
 	margin: 10px;
 	font-size: 15px !important;
+	font-family: orator-std, monospace;
+	font-style: normal;
+	font-weight: 400;
 }
 
 .bottombox {
@@ -49,4 +61,21 @@
 	color: dark-grey;
 	font-style: italic;
 	margin: 5px;
+}
+
+.logobox {
+	text-align: center;
+	margin: 0 0 20px 0;
+}
+
+.logo {
+	width:200px;
+}
+
+.headerlogo {
+	width: 100px;
+}
+
+.navbar {
+	background-color: #d1d3d4 !important;
 }

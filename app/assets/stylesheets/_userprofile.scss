@@ -1,0 +1,17 @@
+.userinfocontainer {
+	display: flex;
+	flex-direction: row;
+	margin: auto;
+}
+
+.userimg {
+	width: 200px;
+	padding: 0 20px 0 20px;
+}
+
+.userdescription {
+	font-family: orator-std, monospace;
+	font-style: normal;
+	font-size: 20px;
+	margin: 0 20px 0 20px;
+}

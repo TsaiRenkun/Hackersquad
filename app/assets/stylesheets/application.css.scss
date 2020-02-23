@@ -15,5 +15,8 @@
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "devise_styles.css";
 
 @use 'homepage';
+@use 'userprofile';
+

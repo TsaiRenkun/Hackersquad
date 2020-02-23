@@ -1,21 +1,13 @@
-<p>
-  <strong>Created By:</strong>
-  <%= @userprofile.user %>
-</p>
+<h1 class = "header">Your Profile</h1>
 
-<p>
-  <strong>Name:</strong>
-  <%= @userprofile.username %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @userprofile.description %>
-</p>
-
-<p>
-  <strong>Image:</strong>
-  <%= @userprofile.img %>
-</p>
-
+<div class = "userinfocontainer">
+	<div class = "userimg">
+		<%= image_tag(@userprofile.img, :class => "userimg") %>
+	</div>
+	<div class = "userdescription">
+	  <h1>Username: <%= @userprofile.username %></h1>
+	  <h1>Description: <%= @userprofile.description %></h1>
+	  <a href= <%= edit_userprofile_path(@userprofile) %> class="btn btn-primary edit">Edit your Profile</a>
+	</div>
+</div>
 <%= link_to 'Back', root_path %>

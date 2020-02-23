@@ -1,0 +1,28 @@
+.field {
+	font-size: 20px !important;
+	font-family: orator-std, monospace;
+	font-style: normal;
+	padding: 10px;
+}
+
+em {
+	font-size: 12px !important;
+}
+
+.centerblock {
+	text-align: left;
+	background-color: #cbcbcb;
+	border-radius: 10px;
+	padding: 10px;
+	width: 310px;
+	color: black !important;
+	justify-content: center;
+	margin: 0 auto;
+}
+
+.center {
+	text-align: center;
+}
+
+.parentcontainer {
+}
