@@ -1,37 +1,28 @@
-index.html.erb
 <%= link_to 'New event', new_event_path %>
-<h1>Listing events</h1>
+<h1>Upcoming Hackatons</h1>
 
-<table>
-  <tr>
-    <th>name</th>
-    <th>description</th>
-    <th>date</th>
-    <th>location</th>
-    <th>img</th>
-    <th>max_group</th>
-    <th>max_per_group</th>
-    <th></th>
-  </tr>
 
+<div class="container-for-cards">
   <% @events.each do |event| %>
-    <tr>
-      <td><%= event.name %></td>
-      <td><%= event.description %></td>
-      <td><%= event.date %></td>
-      <td><%= event.location %></td>
-      <td><%= event.img %></td>
-      <td><%= event.max_group %></td>
-      <td><%= event.max_per_group %></td>
-      <td>
-      	<% if event.attends.find_by(user: @user)%>
-      	<button type="button" disabled>joined</button>
-				<% end %>
-      </td>
-      <td><%= link_to 'Show', event_path(event) %></td>
-      <td><%= link_to 'Edit', edit_event_path(event) %></td>
-      <td><%= Attend.where(event:event.id).length %></td>
-      <td><%= event.developer.to_i + event.ux.to_i %>
-    </tr>
+    <div class="card">
+      <div class="imagecard" style="background-image:url(<%= event.img %>); background-size:cover;"> 
+        <% if Event.exists?(user_id: @user) %>
+          <div class="buttonspace"><a href= <%= edit_event_path(event) %> class="btn btn-primary edit">Edit your event</a></div>
+        <% end %>
+        <% if event.attends.find_by(user: @user)%>
+          <div class="ifattend">I'm Attending</div>
+        <% end %>
+      </div>
+      <div class="card-body">
+        <h2 class="card-title"><%= event.name %></h2>
+        <h3><%= event.date.to_formatted_s(:long) %></h3>
+        <h3><%= event.location %></h3>
+        <a href= <%= event_path(event) %> class="btn btn-primary more">Find out more</a>
+        <div class="bottombox">
+          <div>Organisor: <%= Userprofile.find_by(user_id: event.user_id).username %></div>
+          <div>Participants: Attend.where(event:event.id).length %></div>
+        </div>          
+      </div>
+    </div>
   <% end %>
-</table>
+</div>
