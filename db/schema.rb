@@ -65,10 +65,6 @@ ActiveRecord::Schema.define(version: 2020_02_21_094133) do
     t.text "name"
   end
 
-  create_table "skill", force: :cascade do |t|
-    t.text "name"
-  end
-
   create_table "userprofiles", force: :cascade do |t|
     t.bigint "user_id"
     t.string "username"

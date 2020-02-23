@@ -4,8 +4,8 @@ groups show.html.erb
 	<tr>
 		<th>Name</th>
 	</tr>
-	<% @group.each do |grp| %>
+	<% @attend.pluck(:user_id).user.each do |attend| %>
 		<tr>
-			<td></td>
+			<td><%= attend%></td>
 		</tr>
 	<%end%>
