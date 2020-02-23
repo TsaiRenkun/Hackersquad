@@ -1,0 +1,19 @@
+---
+development:
+  cloud_name: debtjftsj
+  api_key: '686578612885631'
+  api_secret: rvCc4WyQYq4AxgwyVYyojSFRCKs
+  enhance_image_tag: true
+  static_file_support: false
+production:
+  cloud_name: debtjftsj
+  api_key: '686578612885631'
+  api_secret: rvCc4WyQYq4AxgwyVYyojSFRCKs
+  enhance_image_tag: true
+  static_file_support: true
+test:
+  cloud_name: debtjftsj
+  api_key: '686578612885631'
+  api_secret: rvCc4WyQYq4AxgwyVYyojSFRCKs
+  enhance_image_tag: true
+  static_file_support: false
