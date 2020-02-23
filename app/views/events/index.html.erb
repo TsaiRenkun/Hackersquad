@@ -1,28 +1,56 @@
-<%= link_to 'New event', new_event_path %>
-<h1>Upcoming Hackatons</h1>
+<div class="logobox">
+  <%= image_tag("logo2.png", :class => "logo") %>
+  <%= image_tag("title.png", :class => "logo") %>
+</div>
 
+<div class = "mainblockcontainer">
+  <div class = "mainblock">
 
-<div class="container-for-cards">
-  <% @events.each do |event| %>
-    <div class="card">
-      <div class="imagecard" style="background-image:url(<%= event.img %>); background-size:cover;">
-        <% if Event.exists?(user_id: @user) %>
-          <div class="buttonspace"><a href= <%= edit_event_path(event) %> class="btn btn-primary edit">Edit your event</a></div>
-        <% end %>
-        <% if event.attends.find_by(user: @user)%>
-          <div class="ifattend">I'm Attending</div>
-        <% end %>
-      </div>
-      <div class="card-body">
-        <h2 class="card-title"><%= event.name %></h2>
-        <h3><%= event.date.to_formatted_s(:long) %></h3>
-        <h3><%= event.location %></h3>
-        <a href= <%= event_path(event) %> class="btn btn-primary more">Find out more</a>
-        <div class="bottombox">
-          <div>Organisor: <%= Userprofile.find_by(user_id: event.user_id) %></div>
-          <div>Participants: <%=Attend.where(event:event.id).length %></div>
+    <% if user_signed_in? %> 
+
+      <% if  Event.exists?(:user_id => @user) %> 
+        <div class="header"><h1>Events you are Hosting</h1></div>
+          <div class="container-for-cards">
+            <%= render 'hostingcards' %>
+          </div>
+      <% end %>
+
+      <% if  Attend.exists?(:user_id => @user) %> 
+        <div class="header"><h1>Events you are Attending</h1></div>
+              <div class="container-for-cards">
+            <%= render 'attendingcards' %>
+          </div>
+      <% end %>
+    <% end %>
+
+    <div class="header"><h1>Upcoming Events</h1></div>
+
+    <div class="container-for-cards">
+      <% @events.each do |event| %>
+        <div class="card">
+          <div class="imagecard" style="background-image:url(<%= event.img %>); background-size:cover;"> 
+            <% if event.user_id == @user %>
+              <div class="buttonspace"><a href= <%= edit_event_path(event) %> class="btn btn-primary edit">Edit your event</a></div>
+            <% end %>
+            <% if event.attends.find_by(user: @user)%>
+              <div class="ifattend">I'm Attending</div>
+            <% end %>
+          </div>
+          <div class="card-body">
+            <h2 class="card-title"><%= event.name %></h2>
+            <h3><%= event.date.to_formatted_s(:long) %></h3>
+            <h3><%= event.location %></h3>
+            <a href= <%= event_path(event) %> class="btn btn-primary more">Find out more</a>
+            <div class="bottombox">
+              <div>Organisor: <%= Userprofile.find_by(user_id: event.user_id).username %></div>
+              <div>Participants: <%= Attend.where(event:event.id).length %></div>
+            </div>          
+          </div>
         </div>
-      </div>
+      <% end %>
     </div>
-  <% end %>
+
+    <%= link_to 'New event', new_event_path %>
+
+  </div>
 </div>

@@ -1,0 +1,22 @@
+<% Attend.where(user_id:@user).each do |event| %>
+	<div class="card">
+		<div class="imagecard" style="background-image:url(<%= Event.find_by(id:event.id).img %>); background-size:cover;"> 
+		  <% if event.user_id == @user %>
+		    <div class="buttonspace"><a href= <%= edit_event_path(event) %> class="btn btn-primary edit">Edit your event</a></div>
+		  <% end %>
+		  <% if Attend.find_by(user: @user)%>
+		    <div class="ifattend">I'm Attending</div>
+		  <% end %>
+		</div>
+		<div class="card-body">
+		  <h2 class="card-title"><%= Event.find_by(id:event.id).name %></h2>
+		  <h3><%= Event.find_by(id:event.id).date.to_formatted_s(:long) %></h3>
+		  <h3><%= Event.find_by(id:event.id).location %></h3>
+		  <a href= <%= event_path(event) %> class="btn btn-primary more">Find out more</a>
+		  <div class="bottombox">
+		    <div>Organisor: <%= Userprofile.find_by(user_id: event.user_id).username %></div>
+		    <div>Participants: <%= Attend.where(event:event.id).length %></div>
+		  </div>          
+		</div>
+	</div>
+<% end %>
