@@ -1,5 +1,9 @@
 class GroupsController < ApplicationController
 
+  def show
+    @attend = Attend.where(group_id: params[:id])
+  end
+
   def new
   end
 

@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   get '/events/:id' => 'events#show' , as: 'event'
   get '/events/:id/edit' => 'events#edit', as: 'edit_event'
   patch '/events/:id' => 'events#update'
-
+  get '/groups/:id' => 'groups#show' , as: 'group'
 
 
 
