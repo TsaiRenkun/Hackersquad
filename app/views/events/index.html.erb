@@ -5,7 +5,7 @@
 <div class="container-for-cards">
   <% @events.each do |event| %>
     <div class="card">
-      <div class="imagecard" style="background-image:url(<%= event.img %>); background-size:cover;"> 
+      <div class="imagecard" style="background-image:url(<%= event.img %>); background-size:cover;">
         <% if Event.exists?(user_id: @user) %>
           <div class="buttonspace"><a href= <%= edit_event_path(event) %> class="btn btn-primary edit">Edit your event</a></div>
         <% end %>
@@ -19,9 +19,9 @@
         <h3><%= event.location %></h3>
         <a href= <%= event_path(event) %> class="btn btn-primary more">Find out more</a>
         <div class="bottombox">
-          <div>Organisor: <%= Userprofile.find_by(user_id: event.user_id).username %></div>
-          <div>Participants: Attend.where(event:event.id).length %></div>
-        </div>          
+          <div>Organisor: <%= Userprofile.find_by(user_id: event.user_id) %></div>
+          <div>Participants: <%=Attend.where(event:event.id).length %></div>
+        </div>
       </div>
     </div>
   <% end %>
