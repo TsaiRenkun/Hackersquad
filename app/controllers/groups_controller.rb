@@ -1,7 +1,8 @@
 class GroupsController < ApplicationController
 
   def show
-    @attend = Attend.where(group_id: params[:id])
+    @attend = Attend.where(group_id: params[:id]).pluck(:user_id)
+    @userprofile = Userprofile.where(user_id: @attend).pluck(:username)
   end
 
   def new
