@@ -13,10 +13,10 @@ Applicants for Hackathons sometimes are unable to find a team to join due to typ
 ## ERD
 ![](https://github.com/TsaiRenkun/Hackersquad/blob/master/Project3_images/ERD.PNG)
 ## Technologies 
-Ruby on Rails
-Active Record
-Bootstrap
-SCSS
+        Ruby on Rails
+        Active Record
+        Bootstrap
+        SCSS
 
 ## Approach
 
