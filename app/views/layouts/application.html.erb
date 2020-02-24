@@ -11,7 +11,7 @@
   </head>
 
   <body>
-    <ul class="ulnav navbar navbar-expand-lg">   
+    <ul class="ulnav navbar navbar-expand-lg">
       <div class= "row">
       <li class = "linav">
         <%= link_to root_path do %>
@@ -20,11 +20,12 @@
       </li>
     </div>
     <div class="row">
-      <li class = "linav userprofilenav"><a href= "/userprofiles/<%=current_user.id%>"><strong></a>Welcome!</strong></li>
+      <li class = "linav userprofilenav"><a href= "/userprofiles/<%=current_user.id%>">
+      	<strong>Welcome!</strong></a></li>
       <li class = "linav"><a href= "/all" >  See All Events</a></li>
       <% if user_signed_in? %>
         <li class = "linav"><a href= "/events/new" >  Create New Event</a></li>
-        
+
         <li class = "linav"><a href= "/userprofiles/<%=current_user.id%>">Profile</a></li>
       <% end %>
     </div>
@@ -38,7 +39,7 @@
       <% end %>
     </div>
     </ul>
-            
+
     <%= yield %>
 
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
