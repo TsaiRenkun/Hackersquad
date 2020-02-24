@@ -1,7 +1,6 @@
     <div class="header"><h1>All Events</h1></div>
-    <h2 style = "color: red">Comment from Safraz: For some strange reason, only the first one is showing up. To fix!</h2>
     <div class="container-for-cards">
-      <% Event.find(:all) do |event| %>
+      <% @events.each do |event| %>
         <div class="card">
           <div class="imagecard" style="background-image:url(<%= event.img %>); background-size:cover;"> 
             <% if event.user_id == @user %>
