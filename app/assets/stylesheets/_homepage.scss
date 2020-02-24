@@ -12,6 +12,7 @@
 	text-align: center;
 	text-overflow: ellipsis;
 	width:300px;
+	border-radius: 20%;
 }
 
 .container-for-cards-no_overflow {
@@ -37,8 +38,6 @@
 	text-align: center;
 	object-fit: contain !important;
 }
-
-
 
 .more {
 	margin: 10px;
