@@ -1,8 +1,8 @@
 <h1 class = "header">Your Profile</h1>
 
 <div class = "userinfocontainer">
-	<div class = "userimg">
-		<%= cl_image_tag(@userprofile.img, :width => 400, :height => 400)%>
+	<div>
+		<%= cl_image_tag(@userprofile.img, :class => "userimg")%>
 	</div>
 	<div class = "userdescription">
 	  <h1>Username: <%= @userprofile.username %></h1>

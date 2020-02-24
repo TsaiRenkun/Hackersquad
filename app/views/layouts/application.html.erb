@@ -12,16 +12,23 @@
 
   <body>
     <ul class="ulnav navbar navbar-expand-lg">   
+      <div class= "row">
       <li class = "linav">
         <%= link_to root_path do %>
           <%= image_tag("logo3.png", :class => "headerlogo") %>
         <% end %>
       </li>
+    </div>
+    <div class="row">
+      <li class = "linav userprofilenav"><a href= "/userprofiles/<%=current_user.id%>"><strong></a>Welcome!</strong></li>
+      <li class = "linav"><a href= "/all" >  See All Events</a></li>
       <% if user_signed_in? %>
-        <li class = "linav userprofilenav"><a href= "/userprofiles/<%=current_user.id%>"><strong></a>Welcome <%= Userprofile.find_by(user_id: current_user.id).username %>!</strong></li>
         <li class = "linav"><a href= "/events/new" >  Create New Event</a></li>
-        <li class = "linav"><a href= "/all" >  See All Events</a></li>
+        
+        <li class = "linav"><a href= "/userprofiles/<%=current_user.id%>">Profile</a></li>
       <% end %>
+    </div>
+    <div class = "row last">
       <% if !user_signed_in? %>
         <li class = "linav"><a href="/users/sign_in">  Log In </a></li>
         <li class = "linav"><a href="/users/sign_up">  Register </a></li>
@@ -29,6 +36,7 @@
       <% if user_signed_in? %>
         <li class = "linav"><%= link_to 'Log out', destroy_user_session_url, method: :delete %></li>
       <% end %>
+    </div>
     </ul>
             
     <%= yield %>

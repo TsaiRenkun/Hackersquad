@@ -8,8 +8,6 @@
 	  <h1>Description: <strong><%= @event.description %></strong></h1>
 	  <h1>Date: <strong><%= @event.date.to_formatted_s(:long) %></strong></h1>
 	  <h1>Location: <strong><%= @event.location %></strong></h1>
-	  <h1>Maximum number of group: <strong><%= @event.max_group %></strong></h1>
-	  <h1>Maximum member per group: <strong><%= @event.max_per_group %></strong></h1>
 	  <% if @event.attends.find_by(user: @user) %>
 		<%= form_with(url: "/leave" , method: "delete") do %>
   			<input name="event_id" type="hidden" value= <%=@event.id %>>
@@ -39,49 +37,41 @@ src="https://www.google.com/maps/embed/v1/search?q=<%= @event.location %>&key=<%
 	</div>
 </div>
 <% if @event.attends.find_by(user: @user) %>
+	<div class = "groupscontainer">
+		<% @group.each do |grp| %>
+	      	<div class = "eachgroupcontainer">
+		      	<h2>Group: <%= grp.group_number %></h2>
+		      	<h2>Developers participating: <%= Attend.where(event: @event.id , group:grp.id, role: 1).length %> / <%= grp.developer%></h2>
+		      	<h2>Designers participating: <%= Attend.where(event: @event.id , group:grp.id, role: 2).length %> / <%= grp.ux%></h2>
+		      	<% if Attend.find_by(user:@user.id, event:@event.id, group:grp.id) %>
+		      		<%= form_with(url: "/leave/group" , method: "delete") do %>
+		      			<input name="attend_id" type="hidden" value= <%= Attend.find_by(user:@user.id, event:@event.id, group:grp.id).id %>>
+		      			<div class = "center">
+		      				<%= submit_tag 'Leave', :class => "buttontext btn btn-primary"%>
+		      			</div>
+		      			<div class = "center">
+            				<%= link_to 'Message your Group', group_path(grp.id), :class => "buttontext btn btn-primary" %>
+            			</div>
+		      		<% end %>
+		      	<% elsif Attend.find_by(user:@user.id, event:@event.id) && Attend.exists?(user:@user.id, event:@event.id, group:nil) && Attend.where(event:@event.id, group:grp.id).length << @event.developer.to_i + @event.ux.to_i %>
+		      		<%= form_with(url: "/join/group" , method: "post") do %>
+		      			<% if Attend.where(event: @event.id , group:grp.id, role: 1).length == @event.developer.to_i && Attend.find_by(event: @event.id, user:@user.id).role.id.to_i == 1%>
+			  				 <p> The role you are applying for in this team is full </p>
+			  			<% elsif Attend.where(event: @event.id , group:grp.id, role: 2).length == @event.ux.to_i && Attend.find_by(event: @event.id, user:@user.id).role.id.to_i == 2 %>
+			  				 <p> The role you are applying for in this team is full </p>
+			  			<% else %>
+			  				<input name="attend_id" type="hidden" value= <%= Attend.find_by(user:@user.id, event:@event.id).id %>>
+			  				<input name="group_id" type="hidden" value= <%= grp.id %>>
+			  				<div class = "center">
+			  					<%= submit_tag 'Join Group', :class => "buttontext btn btn-primary" %>
+			  				</div>
+			  			<% end %>
+			  		<% end %>
+		      	<% end %>
 
-					<table class="table">
-  					<tr>
-					    <th>Group</th>
-					    <th>developer</th>
-					    <th>ux</th>
-					    <th>Join dev</th>
-					    <th>Join ux</th>
-					    <th>Join/Leave</th>
-					    <th>group page</th>
-					  </tr>
-					  <% @group.each do |grp| %>
-						  <tr>
-	      				<td><%= grp.group_number %></td>
-	      				<td><%= grp.developer %></td>
-	      				<td><%= grp.ux %></td>
-	      				<td>
-		      				<% if Attend.find_by(user:@user.id, event:@event.id, group:grp.id) %>
-		      					<%= form_with(url: "/leave/group" , method: "delete") do %>
-			  				 			<input name="attend_id" type="hidden" value= <%= Attend.find_by(user:@user.id, event:@event.id, group:grp.id).id %>>
-			  				 			<%= submit_tag 'Leave'%>
-
-		      						<% end %>
-		      					<% elsif Attend.find_by(user:@user.id, event:@event.id) && Attend.exists?(user:@user.id, event:@event.id, group:nil) && Attend.where(event:@event.id, group:grp.id).length << @event.developer.to_i + @event.ux.to_i %>
-		      							<%= form_with(url: "/join/group" , method: "post") do %>
-		      								<% if Attend.where(event: @event.id , group:grp.id, role: 1).length == @event.developer.to_i && Attend.find_by(event: @event.id, user:@user.id).role.id.to_i == 1%>
-			  				 					<p> The role you are applying for in this team is full </p>
-			  				 				<% elsif Attend.where(event: @event.id , group:grp.id, role: 2).length == @event.ux.to_i && Attend.find_by(event: @event.id, user:@user.id).role.id.to_i == 2 %>
-			  				 					<p> The role you are applying for in this team is full </p>
-			  				 				<% else %>
-			  				 					<input name="attend_id" type="hidden" value= <%= Attend.find_by(user:@user.id, event:@event.id).id %>>
-			  				 					<input name="group_id" type="hidden" value= <%= grp.id %>>
-			  				 					<%= submit_tag 'join' %>
-			  				 				<% end %>
-			  				 		<% end %>
-		      				<% end %>
-	  						</td>
-	  						<td>placeholder</td>
-	  						<td>placeholder2</td>
-                <td><%= link_to 'Group', group_path(grp.id) %></td>
-	      			</tr>
-						<% end %>
-					</table>
+	    	</div>
+	    <% end %>
+	</div>
 <% end %>
 
 <%= link_to 'Back', root_path %>
