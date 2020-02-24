@@ -20,6 +20,7 @@
 	display: flex;
 	flex-wrap: wrap;
 	overflow: hidden;
+	text-align: center;
 }
 
 .container-for-cards {
@@ -78,7 +79,7 @@
 }
 
 .logo {
-	width:200px;
+	width:300px;
 }
 
 .headerlogo {
@@ -99,6 +100,8 @@
 }
 
 .ulnav {
+  display: flex;
+  width: 100%;
   list-style-type: none;
   color: black !important;
 }
@@ -110,4 +113,8 @@ li a {
 a {
 	font-size: 20px;
 	margin: 10px;
+}
+
+.last {
+	align_self: flex-end;
 }
