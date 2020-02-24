@@ -18,7 +18,7 @@
         <% end %>
       </li>
       <% if user_signed_in? %>
-        <li class = "linav"><a href= "/userprofiles/<%=current_user.id%>"></a></li>
+        <li class = "linav userprofilenav"><a href= "/userprofiles/<%=current_user.id%>"><strong></a>Welcome <%= Userprofile.find_by(user_id: current_user.id).username %>!</strong></li>
         <li class = "linav"><a href= "/events/new" >  Create New Event</a></li>
         <li class = "linav"><a href= "/all" >  See All Events</a></li>
       <% end %>

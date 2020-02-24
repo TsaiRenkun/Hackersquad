@@ -4,6 +4,7 @@
 	font-style: normal;
 	font-weight: 200;
 	text-transform: uppercase;
+	padding: 20px;
 }
 
 .card {
@@ -14,9 +15,18 @@
 	border-radius: 20%;
 }
 
-.container-for-cards {
+.container-for-cards-no_overflow {
+	height: 520px;
 	display: flex;
 	flex-wrap: wrap;
+	overflow: hidden;
+}
+
+.container-for-cards {
+	height: 520px;
+	display: flex;
+	flex-wrap: wrap;
+	overflow: hidden;
 }
 
 .imagecard {
@@ -95,4 +105,9 @@
 
 li a {
 	color: black !important;
+}
+
+a {
+	font-size: 20px;
+	margin: 10px;
 }
