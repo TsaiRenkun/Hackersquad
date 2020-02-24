@@ -7,9 +7,11 @@ Someone that likes to go for hackatons. Sometimes because the registeration is o
 Applicants for Hackathons sometimes are unable to find a team to join due to types of participants being disproportional.
 
 ## Wireframe
-
+![](https://github.com/TsaiRenkun/Hackersquad/blob/master/Project3_images/Wireframe1.PNG)
+![](https://github.com/TsaiRenkun/Hackersquad/blob/master/Project3_images/Wireframe2.PNG)
+![](https://github.com/TsaiRenkun/Hackersquad/blob/master/Project3_images/Wireframe3.PNG)
 ## ERD
-
+![](https://github.com/TsaiRenkun/Hackersquad/blob/master/Project3_images/ERD.PNG)
 ## Technologies 
 Ruby on Rails
 Active Record
