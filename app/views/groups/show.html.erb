@@ -8,3 +8,42 @@
 			<td><%= attend%></td>
 		</tr>
 	<%end%>
+
+
+<table class='table'>
+	<tr>
+		<th>User</th>
+		<th>comment</th>
+	</tr>
+	<% @comment.each do |comment| %>
+		<tr>
+			<td><%= comment.user.userprofile.username%></td>
+			<td><%= comment.comment%></td>
+		</tr>
+	<%end%>
+
+
+
+
+
+
+<%= form_with scope: :text, url: "/groups", local: true do |form| %>
+  <p>
+	 <%= form.label :comment %><br>
+  <%= form.text_area :comment %>
+  </p>
+
+  <p>
+
+  	<%= form.hidden_field :user_id, value: @user %>
+  </p>
+
+  <p>
+
+  	<%= form.hidden_field :group_id, value: @groupid %>
+  </p>
+
+  <p>
+   	<%= form.submit %>
+  </p>
+<% end %>

@@ -80,8 +80,19 @@
 	font-size: 20px;
 	font-family: orator-std, monospace;
 	font-weight: 400;
+	color: black !important;
 }
 
-.nav-link {
-	margin: 5px;
+.linav {
+	margin: 0 20px 0 20px;
+	color: black !important;
+}
+
+.ulnav {
+  list-style-type: none;
+  color: black !important;
+}
+
+li a {
+	color: black !important;
 }
