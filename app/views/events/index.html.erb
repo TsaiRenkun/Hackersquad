@@ -5,16 +5,16 @@
 <div class = "mainblockcontainer">
   <div class = "mainblock">
 
-    <% if user_signed_in? %> 
+    <% if user_signed_in? %>
 
-      <% if  Event.exists?(:user_id => @user) %> 
+      <% if  Event.exists?(:user_id => @user) %>
         <div class="header"><h1>Events you are Hosting</h1></div>
           <div class="container-for-cards-no_overflow">
             <%= render 'hostingcards' %>
           </div>
       <% end %>
 
-      <% if  Attend.exists?(:user_id => @user) %> 
+      <% if  Attend.exists?(:user_id => @user) %>
         <div class="header"><h1>Events you are Attending</h1></div>
               <div class="container-for-cards-no_overflow">
             <%= render 'attendingcards' %>
@@ -27,7 +27,7 @@
     <div class="container-for-cards-no_overflow">
       <% @events.each do |event| %>
         <div class="card">
-          <div class="imagecard" style="background-image:url(<%= event.img %>); background-size:cover;"> 
+          <div class="imagecard" style="background-image:url(<%= event.img %>); background-size:cover;">
             <% if event.user_id == @user %>
               <div class="buttonspace"><a href= <%= edit_event_path(event) %> class="btn btn-primary edit">Edit your event</a></div>
             <% end %>
@@ -43,7 +43,7 @@
             <div class="bottombox">
               <div>Organisor: <%= Userprofile.find_by(user_id: event.user_id).username %></div>
               <div>Participants: <%= Attend.where(event:event.id).length %></div>
-            </div>          
+            </div>
           </div>
         </div>
       <% end %>
