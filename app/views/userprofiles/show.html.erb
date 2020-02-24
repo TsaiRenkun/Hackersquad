@@ -7,7 +7,9 @@
 	<div class = "userdescription">
 	  <h1>Username: <%= @userprofile.username %></h1>
 	  <h1>Description: <%= @userprofile.description %></h1>
+	  <% if @userprofile.id == current_user.id %>
 	  <a href= <%= edit_userprofile_path(@userprofile) %> class = "btn btn-primary edit" >Edit your Profile</a>
+	  <% end %>
 	</div>
 </div>
 <%= link_to 'Back', root_path %>
