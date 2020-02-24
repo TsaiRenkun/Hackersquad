@@ -2,12 +2,12 @@
 
 <div class = "userinfocontainer">
 	<div class = "userimg">
-		<%= image_tag(@userprofile.img, :class => "userimg") %>
+		<%= cl_image_tag(@userprofile.img, :width => 400, :height => 400)%>
 	</div>
 	<div class = "userdescription">
 	  <h1>Username: <%= @userprofile.username %></h1>
 	  <h1>Description: <%= @userprofile.description %></h1>
-	  <a href= <%= edit_userprofile_path(@userprofile) %> class="btn btn-primary edit">Edit your Profile</a>
+	  <a href= <%= edit_userprofile_path(@userprofile) %> class = "btn btn-primary edit" >Edit your Profile</a>
 	</div>
 </div>
 <%= link_to 'Back', root_path %>

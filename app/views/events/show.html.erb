@@ -5,6 +5,7 @@
 		<%= image_tag(@event.img, :class => "userimg") %>
 	</div>
 	<div class = "userdescription">
+		<%= cl_image_tag(@event.img, :width => 400, :height => 400) %>
 	  <h1>Description: <strong><%= @event.description %></strong></h1>
 	  <h1>Date: <strong><%= @event.date.to_formatted_s(:long) %></strong></h1>
 	  <h1>Location: <strong><%= @event.location %></strong></h1>
