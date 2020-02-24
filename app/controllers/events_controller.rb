@@ -45,14 +45,17 @@ end
 
     @event.user_id = current_user.id
 
+    uploaded_file = params[ :event ][:img].path
+    result= Cloudinary::Uploader.upload(uploaded_file)
+    @event.img = result["url"]
     @event.save
 
-    uploaded_file = params[ :event ][:img].path
-    cloudnary_file = Cloudinary::Uploader.upload(uploaded_file)
-
     event_params[:max_group].to_i.times do |i|
-      puts "hello yo"
-      Group.create(event: @event, group_number:i+1, developer: @event.developer, ux: @event.ux)
+    puts "hello yo"
+    Group.create(event: @event, group_number:i+1, developer: @event.developer, ux: @event.ux)
+
+
+
     end
     redirect_to @event
   end

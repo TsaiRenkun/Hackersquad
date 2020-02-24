@@ -25,10 +25,16 @@ end
   	puts userprofile_params
     @userprofile = Userprofile.new(userprofile_params)
 
+    uploaded_file = params[ :userprofile ][:img].path
+    puts uploaded_file
+    result = Cloudinary::Uploader.upload(uploaded_file)
+    puts result.inspect
     @userprofile.user = current_user
+    @userprofile.img = result["url"]
 
     @userprofile.save
-    redirect_to @userprofile
+
+    redirect_to userprofile_path(@userprofile.user)
   end
 
   # PATCH/PUT /profiles/1
