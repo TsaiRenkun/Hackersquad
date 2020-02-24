@@ -11,35 +11,25 @@
   </head>
 
   <body>
-				<div>
-            <nav class="navbar navbar-expand-lg navbar-light">
-                    <%= link_to root_path do %>
-                      <%= image_tag("logo3.png", :class => "headerlogo") %>
-                    <% end %>
-                 <% if user_signed_in? %>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                                <a class="nav-link" href= "/userprofiles/<%=current_user.id%>" >  Profile  <span class="sr-only">(current)</span></a>
-                                <a class="nav-link" href= "/events/new" >  Create New Event  <span class="sr-only">(current)</span></a>
-                                 <a class="nav-link" href= "/all" >  See All Events  <span class="sr-only">(current)</span></a>
-                    </div>
-                  <% end %>
-                        <span class="nav-item">
-                        	<% if !user_signed_in? %>
-                            <a class="nav-link" href="/users/sign_in">  Log In  </a>
-                          <% end %>
-                        </span>
-                        <span class="nav-item">
-                        	<% if !user_signed_in? %>
-                            <a class="nav-link" href="/users/sign_up">  Register  </a>
-                          <% end %>
-                        </span>
-                        <span class="nav-item">
-                        	<% if user_signed_in? %>
-                            <%= link_to 'Log out', destroy_user_session_url, method: :delete %>
-                          <% end %>
-                        </span>
-                </nav>
-            </div>
+    <ul class="ulnav navbar navbar-expand-lg">   
+      <li class = "linav">
+        <%= link_to root_path do %>
+          <%= image_tag("logo3.png", :class => "headerlogo") %>
+        <% end %>
+      </li>
+      <% if user_signed_in? %>
+        <li class = "linav"><a href= "/userprofiles/<%=current_user.id%>"></a></li>
+        <li class = "linav"><a href= "/events/new" >  Create New Event</a></li>
+        <li class = "linav"><a href= "/all" >  See All Events</a></li>
+      <% end %>
+      <% if !user_signed_in? %>
+        <li class = "linav"><a href="/users/sign_in">  Log In </a></li>
+        <li class = "linav"><a href="/users/sign_up">  Register </a></li>
+      <% end %>
+      <% if user_signed_in? %>
+        <li class = "linav"><%= link_to 'Log out', destroy_user_session_url, method: :delete %></li>
+      <% end %>
+    </ul>
             
     <%= yield %>
 

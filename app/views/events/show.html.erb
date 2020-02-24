@@ -2,7 +2,7 @@
 
 <div class = "userinfocontainer">
 	<div class = "userimg">
-		<%= image_tag(@event.img, :class => "userimg") %>
+		<%= image_tag(cl_image_tag(@event.img), :class => "userimg") %>
 	</div>
 	<div class = "userdescription">
 	  <h1>Description: <strong><%= @event.description %></strong></h1>
