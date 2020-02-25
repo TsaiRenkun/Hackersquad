@@ -1,24 +1,25 @@
-# README
+# HACKER SQUAD
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Persona
+Someone that likes to go for hackatons. Sometimes because the registeration is on site, people get left over when there is an imbalance of people that turned up for each role. For example, when there is too many UX/UI people present at the event and there isnt anymore Developers avaliable so they can’t participate in the hackaton.
 
-Things you may want to cover:
+## Problem Statement
+Applicants for Hackathons sometimes are unable to find a team to join due to types of participants being disproportional.
 
-* Ruby version
+## Wireframe
+![](https://github.com/TsaiRenkun/Hackersquad/blob/master/Project3_images/Wireframe1.PNG)
+![](https://github.com/TsaiRenkun/Hackersquad/blob/master/Project3_images/Wireframe2.PNG)
+![](https://github.com/TsaiRenkun/Hackersquad/blob/master/Project3_images/Wireframe3.PNG)
+## ERD
+![](https://github.com/TsaiRenkun/Hackersquad/blob/master/Project3_images/ERD.PNG)
+## Technologies 
+        Ruby on Rails
+        Active Record
+        Bootstrap
+        SCSS
 
-* System dependencies
+## Approach
 
-* Configuration
+## Unsolved Problems
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Possible Future Improvements
